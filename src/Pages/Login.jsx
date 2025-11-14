@@ -37,7 +37,7 @@ const Login = () => {
 					const token = res.data.token;
 					if (token) {
 						localStorage.setItem('token', token);
-						// alert('Login successful!');
+						localStorage.setItem('authUser', JSON.stringify(res.data.user));
 						setUser(res.data.user);
 					} else {
 						alert('No token received');

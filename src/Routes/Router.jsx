@@ -15,6 +15,7 @@ import PageNotFound from '../ErrorPage/PageNotFound';
 
 const authLoader = () => {
 	if (!localStorage.getItem('token')) {
+		localStorage.removeItem('authUser');
 		throw redirect('/auth/login');
 	}
 };

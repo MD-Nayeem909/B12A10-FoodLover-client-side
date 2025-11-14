@@ -7,10 +7,14 @@ import api from '../Utility/axios';
 import { useAuth } from '../Providers/AuthContext';
 
 const MyReviews = () => {
-	const { user } = useAuth();
+	const { user, setUser } = useAuth();
 	const [reviews, setReviews] = useState([]);
 
 	useEffect(() => {
+		const localStorageUser = localStorage.getItem('authUser');
+		if (localStorageUser) {
+			setUser(JSON.parse(localStorageUser));
+		}
 		if (!user) return;
 		api.get('/reviews/me', { author: true }).then((res) => {
 			setReviews(res.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));

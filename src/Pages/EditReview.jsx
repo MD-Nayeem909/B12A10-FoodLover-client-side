@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../Utility/Container';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
 import api from '../Utility/axios';
+import { useAuth } from '../Providers/AuthContext';
 
 const EditReview = () => {
 	const location = useLocation();
+	const { setUser } = useAuth();
 
 	const from = location.state?.from?.pathname || '/my-reviews';
 	const reviewData = location.state?.reviewData || location.state;
@@ -48,6 +50,13 @@ const EditReview = () => {
 			})
 			.catch((error) => console.error(error));
 	};
+
+	useEffect(() => {
+		const localStorageUser = localStorage.getItem('authUser');
+		if (localStorageUser) {
+			setUser(JSON.parse(localStorageUser));
+		}
+	}, []);
 
 	return (
 		<Container>

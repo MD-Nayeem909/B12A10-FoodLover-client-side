@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import Container from '../Utility/Container';
 import { Heart, LogOut } from 'lucide-react';
@@ -6,15 +6,28 @@ import { useTheme } from '../Providers/ThemeProvider';
 import { useAuth } from '../Providers/AuthContext';
 
 const Navbar = () => {
-	const { user, logoutUser } = useAuth();
+	const { user, setUser, logoutUser } = useAuth();
 	const { theme, toggleTheme } = useTheme();
 
 	const handleLogout = async () => {
 		await logoutUser();
-		// remove toke from local storage
 		localStorage.removeItem('token');
+		localStorage.removeItem('authUser');
+		setUser(null);
 		window.location.href = '/';
 	};
+
+	useEffect(() => {
+		const localStorageUser = localStorage.getItem('authUser');
+		try {
+			const data = JSON.parse(localStorageUser);
+			if (localStorageUser) {
+				setUser(data);
+			}
+		} catch (error) {
+			console.error('Error parsing JSON:', error);
+		}
+	}, []);
 
 	const links = (
 		<>
@@ -83,7 +96,7 @@ const Navbar = () => {
 							<div className="flex items-center gap-5 dropdown-end">
 								<div className="dropdown dropdown-end">
 									<div tabIndex={0} className=" m-1">
-										<Link to="/profile" className="tooltip tooltip-left" data-tip={user.displayName || user.username || 'Profile'}>
+										<Link to="/profile" className="tooltip tooltip-left" data-tip={user?.displayName || user.username || 'Profile'}>
 											<div className="avatar">
 												<div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
 													<img src={user.photoURL || user.photoUrl} />

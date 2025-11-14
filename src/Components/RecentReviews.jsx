@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReviewCard from './ReviewCard';
 import { Link } from 'react-router';
 import useService from '../Hooks/useService';
@@ -6,7 +6,7 @@ import Loading from '../Utility/Loading';
 import { useAuth } from '../Providers/AuthContext';
 
 const RecentReviews = () => {
-	const { user } = useAuth();
+	const { user, setUser } = useAuth();
 	const { data, loading } = useService('http://localhost:3000/api/reviews');
 
 	const reviews =
@@ -16,6 +16,13 @@ const RecentReviews = () => {
 				.slice(0, 6)
 				.sort(() => Math.random() - 0.5)) ||
 		[];
+
+	useEffect(() => {
+		const localStorageUser = localStorage.getItem('authUser');
+		if (localStorageUser) {
+			setUser(JSON.parse(localStorageUser));
+		}
+	}, []);
 
 	return (
 		<div className="my-20">
