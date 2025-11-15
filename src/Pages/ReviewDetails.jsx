@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Container from '../Utility/Container';
 import { Heart, MapPin, ArrowLeft, Edit2, Trash2 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router';
-import axios from 'axios';
 import DeleteModal from '../Utility/DeleteModal';
-import { useAuth } from '../Providers/AuthContext';
 import api from '../Utility/axios';
 
 const ReviewDetails = () => {
-	const { setUser } = useAuth();
 	const locationData = useLocation();
 
 	const navigate = useNavigate();
@@ -31,13 +28,6 @@ const ReviewDetails = () => {
 				});
 		});
 	};
-
-	useEffect(() => {
-		const localStorageUser = localStorage.getItem('authUser');
-		if (localStorageUser) {
-			setUser(JSON.parse(localStorageUser));
-		}
-	}, []);
 
 	return (
 		<Container className="">

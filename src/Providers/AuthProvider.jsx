@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	createUserWithEmailAndPassword,
 	deleteUser,
@@ -48,8 +48,19 @@ const AuthProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
+		// custom login user restore
+		const savedUser = localStorage.getItem('authUser');
+		if (savedUser) {
+			setUser(JSON.parse(savedUser));
+			setLoading(false);
+		}
+	}, []);
+
+	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-			setUser(currentUser);
+			if (!localStorage.getItem('authUser')) {
+				setUser(currentUser);
+			}
 			setLoading(false);
 		});
 		return () => unsubscribe();

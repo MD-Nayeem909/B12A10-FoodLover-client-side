@@ -4,11 +4,9 @@ import ReviewCard from '../Components/ReviewCard';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router';
 import api from '../Utility/axios';
-import { useAuth } from '../Providers/AuthContext';
 
 const Favorites = () => {
 	const [favorites, setFavorites] = useState([]);
-	const { setUser } = useAuth();
 
 	useEffect(() => {
 		api.get('/user/favorites')
@@ -24,13 +22,6 @@ const Favorites = () => {
 		if (isFavorite) return;
 		setFavorites(favorites.filter((favorite) => favorite._id !== id));
 	};
-
-	useEffect(() => {
-		const localStorageUser = localStorage.getItem('authUser');
-		if (localStorageUser) {
-			setUser(JSON.parse(localStorageUser));
-		}
-	}, []);
 
 	return (
 		<Container>

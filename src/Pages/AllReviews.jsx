@@ -1,10 +1,9 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import ReviewCard from '../Components/ReviewCard';
 import Container from '../Utility/Container';
 import { Filter, Search } from 'lucide-react';
 import useService from '../Hooks/useService';
 import Loading from '../Utility/Loading';
-import { useAuth } from '../Providers/AuthContext';
 
 const AllReviews = () => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -12,7 +11,6 @@ const AllReviews = () => {
 	const [selectedRating, setSelectedRating] = useState(null);
 	const [selectedLocation, setSelectedLocation] = useState(null);
 	const [showFilters, setShowFilters] = useState(false);
-	const { setUser } = useAuth();
 
 	const { data, loading } = useService('http://localhost:3000/api/reviews');
 	const allReviews = (data.data && data.data.sort(() => Math.random() - 0.5)) || [];
@@ -52,13 +50,6 @@ const AllReviews = () => {
 
 	const uniqueLocations = [...new Set(allReviews.map((r) => r.location))].sort();
 	const hasActiveFilters = searchTerm || selectedRating !== null || selectedLocation !== null;
-
-	useEffect(() => {
-		const localStorageUser = localStorage.getItem('authUser');
-		if (localStorageUser) {
-			setUser(JSON.parse(localStorageUser));
-		}
-	}, []);
 
 	return (
 		<Container>

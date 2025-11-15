@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Container from '../Utility/Container';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router';
 import api from '../Utility/axios';
 import toast from 'react-hot-toast';
-import { useAuth } from '../Providers/AuthContext';
 
 const CreateReview = () => {
-	const { setUser } = useAuth();
-
 	const [formData, setFormData] = useState({
 		foodName: '',
 		image: '',
@@ -49,13 +46,6 @@ const CreateReview = () => {
 			})
 			.catch((error) => console.log(error));
 	};
-
-	useEffect(() => {
-		const localStorageUser = localStorage.getItem('authUser');
-		if (localStorageUser) {
-			setUser(JSON.parse(localStorageUser));
-		}
-	}, []);
 
 	return (
 		<Container>
