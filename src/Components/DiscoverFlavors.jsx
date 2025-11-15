@@ -20,7 +20,7 @@ const DiscoverFlavors = () => {
             <label className="input rounded-l-full rounded-r-none border-none w-full">
               <input
                 type="text"
-                placeholder="search For Products, Categories..."
+                placeholder="Search For Your Favorite Flavors..."
                 className="p-3 border-none"
               />
             </label>

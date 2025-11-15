@@ -88,7 +88,7 @@ const Register = () => {
 							<label className="label mb-2">Name</label>
 							<input
 								type="text"
-								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-gray-100"
+								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-base-200"
 								placeholder="Your Name"
 								onChange={handleUsernameChange}
 								required
@@ -99,7 +99,7 @@ const Register = () => {
 							<label className="label mb-2">Image-URL</label>
 							<input
 								type="text"
-								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-gray-100"
+								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-base-200"
 								placeholder="Image URL...."
 								onChange={handlePhotoURLChange}
 								value={photoURL}
@@ -109,7 +109,7 @@ const Register = () => {
 							<label className="label mb-2">Email</label>
 							<input
 								type="email"
-								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-gray-100"
+								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-base-200"
 								placeholder="enter your email"
 								onChange={handleEmailChange}
 								required
@@ -120,7 +120,7 @@ const Register = () => {
 							<label className="label mb-2">Password</label>
 							<input
 								type={showPassword ? 'text' : 'password'}
-								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-gray-100"
+								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-base-200"
 								placeholder="Enter your password"
 								onChange={handlePasswordChange}
 								required
@@ -134,7 +134,7 @@ const Register = () => {
 							<label className="label mb-2">Confirm Password</label>
 							<input
 								type={showConfirmPassword ? 'text' : 'password'}
-								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-gray-100"
+								className="input w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-primary border-gray-300 bg-base-200"
 								placeholder="Enter your password"
 								onChange={handleConfirmPasswordChange}
 								required

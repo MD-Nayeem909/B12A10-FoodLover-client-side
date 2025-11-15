@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import Container from '../Utility/Container';
-import { Heart, LogOut } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { useTheme } from '../Providers/ThemeProvider';
 import { useAuth } from '../Providers/AuthContext';
 
