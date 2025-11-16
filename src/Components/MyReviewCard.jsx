@@ -9,7 +9,7 @@ const MyReviewCard = ({ review, myFavoriteDelete }) => {
   const handleRemoveReview = (id) => {
     DeleteModal(function () {
       api
-        .delete(`https://food-lover-api-server.vercel.app/reviews/${id}`)
+        .delete(`/api/reviews/${id}`)
         .then((response) => {
           if (myFavoriteDelete) {
             myFavoriteDelete(id);

@@ -34,7 +34,7 @@ const Navbar = () => {
       <NavItem to="/my-reviews">My Reviews</NavItem>
       <NavItem to="/create-review">Create Review</NavItem>
       <NavItem to="/favorites">
-        <Heart size={18} /> Favorites
+        <Heart size={18} className="text-accent" /> Favorites
       </NavItem>
     </>
   );
@@ -82,7 +82,9 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
+            <ul className="menu menu-horizontal px-1 flex justify-center items-center">
+              {links}
+            </ul>
           </div>
           <div className="navbar-end">
             <div className="mr-4">

@@ -5,12 +5,12 @@ import { Link, useLocation, useNavigate } from "react-router";
 import DeleteModal from "../Utility/DeleteModal";
 import api from "../Utility/axios";
 import formatDateForWeb from "../Utility/formatDateForWeb";
+import { useAuth } from "../Providers/AuthContext";
 
 const ReviewDetails = () => {
   const [author, setAuthor] = useState(null);
-
+  const { user, setUser } = useAuth();
   const locationData = useLocation();
-
   const navigate = useNavigate();
   const from = locationData.state?.from?.pathname || "/all-reviews";
 
@@ -43,6 +43,22 @@ const ReviewDetails = () => {
     });
   };
 
+  const handleFavorite = () => {
+    if (!user) return navigator("/auth/login");
+    setIsFavorited(!isFavorited);
+    api
+      .put(`/api/reviews/${_id}/favorite`, { isFavorite: !isFavorited })
+      .then(() => {
+        setUser({
+          ...user,
+          favorites: !isFavorited
+            ? [...user.favorites, _id]
+            : user.favorites.filter((id) => id !== _id),
+        });
+        toast.success(`${isFavorited ? "Removed" : "Added"} from favorites`);
+      });
+  };
+
   useEffect(() => {
     api(`/api/reviews/user/${reviewData._id}`).then((res) => {
       setAuthor(res.data.user);
@@ -60,7 +76,7 @@ const ReviewDetails = () => {
               className="h-full w-full object-cover"
             />
             <button
-              onClick={() => setIsFavorited(!isFavorited)}
+              onClick={handleFavorite}
               className="absolute top-3 right-3 bg-white rounded-full p-2 hover:bg-gray-100 opacity-70 hover:opacity-100 transition-opacity"
             >
               <Heart

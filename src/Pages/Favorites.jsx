@@ -66,6 +66,7 @@ const Favorites = () => {
                     review={favorite}
                     handleFavoriteToggle={handleRemoveFavorite}
                     isFavorite={true}
+                    isFavoritePage={true}
                   />
                 </div>
               ))}

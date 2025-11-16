@@ -9,9 +9,10 @@ const ReviewCard = ({
   review,
   handleFavoriteToggle = () => {},
   isFavorite = false,
+  isFavoritePage = false,
 }) => {
+  const [author, setAuthor] = useState();
   const [isFavorited, setIsFavorited] = useState(isFavorite);
-
   const { user, setUser } = useAuth();
 
   const navigator = useNavigate();
@@ -19,7 +20,7 @@ const ReviewCard = ({
     if (!user) return navigator("/auth/login");
     setIsFavorited(!isFavorited);
     api
-      .put(`/reviews/${review._id}/favorite`, { isFavorite: !isFavorited })
+      .put(`/api/reviews/${review._id}/favorite`, { isFavorite: !isFavorited })
       .then(() => {
         setUser({
           ...user,
@@ -31,6 +32,13 @@ const ReviewCard = ({
         handleFavoriteToggle(review._id, !isFavorited);
       });
   };
+
+  useEffect(() => {
+    if (!isFavoritePage) return;
+    api(`/api/reviews/user/${review._id}`).then((response) => {
+      setAuthor(response.data.user);
+    });
+  }, []);
 
   return (
     <section key={review._id}>
@@ -93,7 +101,9 @@ const ReviewCard = ({
 
           {/* Reviewer & Button */}
           <div className="flex justify-between items-center pt-3 border-t border-dashed border-gray-300">
-            <p className="text-sm text-text-secondary">by {review.author?.username}</p>
+            <p className="text-sm text-text-secondary">
+              by {review.author?.username || author?.name || "Anonymous"}
+            </p>
             <Link
               to={`/review-details/${review._id}`}
               state={review}

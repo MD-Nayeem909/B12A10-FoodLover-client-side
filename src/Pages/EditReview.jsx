@@ -37,7 +37,7 @@ const EditReview = () => {
     e.preventDefault();
     api({
       method: "put",
-      url: "https://food-lover-api-server.vercel.app/reviews/" + reviewData._id,
+      url: "/api/reviews/" + reviewData._id,
       data: formData,
     })
       .then((response) => {
@@ -50,15 +50,6 @@ const EditReview = () => {
           },
           replace: true,
         });
-        // setFormData({
-        //   foodName: "",
-        //   image: "",
-        //   restaurantName: "",
-        //   location: "",
-        //   rating: 5,
-        //   reviewText: "",
-        //   tags: [],
-        // });
       })
       .catch((error) => console.error(error));
   };

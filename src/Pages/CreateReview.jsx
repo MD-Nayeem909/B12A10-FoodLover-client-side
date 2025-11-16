@@ -29,7 +29,7 @@ const CreateReview = () => {
 
     api({
       method: "post",
-      url: "https://food-lover-api-server.vercel.app/reviews",
+      url: "/api/reviews",
       data: formData,
     })
       .then((response) => {
