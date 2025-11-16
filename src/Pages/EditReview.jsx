@@ -37,7 +37,7 @@ const EditReview = () => {
     e.preventDefault();
     api({
       method: "put",
-      url: "http://localhost:3000/api/reviews/" + reviewData._id,
+      url: "https://food-lover-api-server.vercel.app/reviews/" + reviewData._id,
       data: formData,
     })
       .then((response) => {

@@ -8,7 +8,7 @@ import formatDateForWeb from "../Utility/formatDateForWeb";
 
 const ReviewDetails = () => {
   const [author, setAuthor] = useState(null);
-  
+
   const locationData = useLocation();
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ReviewDetails = () => {
   const handleRemoveReview = (id) => {
     DeleteModal(function () {
       api
-        .delete(`http://localhost:3000/api/reviews/${id}`)
+        .delete(`/api/reviews/${id}`)
         .then((response) => {
           //navigate to home page
           navigate("/");
@@ -44,9 +44,8 @@ const ReviewDetails = () => {
   };
 
   useEffect(() => {
-    api(`/reviews/user/${reviewData._id}`).then((res) => {
+    api(`/api/reviews/user/${reviewData._id}`).then((res) => {
       setAuthor(res.data.user);
-
     });
   }, []);
 
@@ -119,7 +118,8 @@ const ReviewDetails = () => {
                 <strong>Reviewer ID :</strong> {reviewData._id}
               </span>
               <span className="text-accent">
-                <strong>Posted :</strong> {formatDateForWeb(reviewData.createdAt)}
+                <strong>Posted :</strong>{" "}
+                {formatDateForWeb(reviewData.createdAt)}
               </span>
             </div>
           </div>

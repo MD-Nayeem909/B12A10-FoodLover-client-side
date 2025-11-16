@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full mx-auto bg-base-200 animate-pulse">
+    <div className="flex flex-col justify-center items-center w-full mx-auto animate-pulse h-[calc(100vh-60vh)]">
       <lord-icon
         src="https://cdn.lordicon.com/kixubvkn.json"
         trigger="loop"

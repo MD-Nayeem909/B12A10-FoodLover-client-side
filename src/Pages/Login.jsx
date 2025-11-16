@@ -7,6 +7,7 @@ import { useAuth } from "../Providers/AuthContext";
 import toast from "react-hot-toast";
 import passwordValidation from "../Utility/passwordValidation";
 import axios from "axios";
+import api from "../Utility/axios";
 
 const Login = () => {
   const { user, setUser, googleSignIn, setLoading } = useAuth();
@@ -30,8 +31,8 @@ const Login = () => {
     }
 
     try {
-      axios
-        .post("http://localhost:3000/auth/login", {
+      api
+        .post("/auth/login", {
           email,
           password,
         })
